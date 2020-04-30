@@ -1,3 +1,6 @@
 {
-    "mongoURI": "mongodb+srv://user:Pass1234@cluster0-b5nlv.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://user:Pass1234@cluster0-b5nlv.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "TheSecret",
+    "githubClientId": "9de4b28997003daf874e",
+    "githubSecret": "6bcef3837a0459e57963e03904a2f11fa99fd524"
 }
