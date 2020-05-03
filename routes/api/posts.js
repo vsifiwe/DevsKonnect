@@ -35,7 +35,7 @@ router.post(
             res.json(post);
         } catch (error) {
             console.error(error.message);
-            res.status(500).json({ message: 'Server Error' });
+            res.status(500).json({ msg: 'Server Error' });
         }
     }
 );
@@ -50,7 +50,7 @@ router.get('/', auth, async (req, res) => {
         res.json(posts);
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -63,15 +63,15 @@ router.get('/:id', auth, async (req, res) => {
         const post = await Post.findById(req.params.id);
 
         if (!post) {
-            return res.status(404).json({ Message: 'Post not found' });
+            return res.status(404).json({ msg: 'Post not found' });
         }
         res.json(post);
     } catch (error) {
         console.error(error.message);
         if (error.kind === 'ObjectId') {
-            return res.status(404).json({ Message: 'Post not found' });
+            return res.status(404).json({ msg: 'Post not found' });
         }
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -84,13 +84,13 @@ router.delete('/:id', auth, async (req, res) => {
         const post = await Post.findById(req.params.id);
 
         if (!post) {
-            return res.status(404).json({ Message: 'Post not found' });
+            return res.status(404).json({ msg: 'Post not found' });
         }
 
         //check user
 
         if (post.user.toString() !== req.user) {
-            return res.status(401).json({ Message: 'User not authorized' });
+            return res.status(401).json({ msg: 'User not authorized' });
         }
 
         await post.remove();
@@ -98,9 +98,9 @@ router.delete('/:id', auth, async (req, res) => {
     } catch (error) {
         console.error(error.message);
         if (error.kind === 'ObjectId') {
-            return res.status(404).json({ Message: 'Post not found' });
+            return res.status(404).json({ msg: 'Post not found' });
         }
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -118,7 +118,7 @@ router.put('/like/:id', auth, async (req, res) => {
             post.likes.filter((like) => like.user.toString() === req.user)
                 .length > 0
         ) {
-            return res.status(400).json({ Message: 'Post already liked' });
+            return res.status(400).json({ msg: 'Post already liked' });
         }
 
         post.likes.unshift({ user: req.user });
@@ -127,7 +127,7 @@ router.put('/like/:id', auth, async (req, res) => {
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -145,7 +145,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
             post.likes.filter((like) => like.user.toString() === req.user)
                 .length === 0
         ) {
-            return res.status(400).json({ Message: 'Post has not been liked' });
+            return res.status(400).json({ msg: 'Post has not been liked' });
         }
 
         //get remove index
@@ -160,7 +160,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
@@ -196,7 +196,7 @@ router.post(
             res.json(post.comments);
         } catch (error) {
             console.error(error.message);
-            res.status(500).json({ message: 'Server Error' });
+            res.status(500).json({ msg: 'Server Error' });
         }
     }
 );
@@ -217,13 +217,13 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
         //check if comment exists
         if (!comment) {
-            return res.status(404).json({ Message: 'Comment not found' });
+            return res.status(404).json({ msg: 'Comment not found' });
         }
 
         //check user
 
         if (comment.user.toString() !== req.user) {
-            return res.status(401).json({ Message: 'User not authorized' });
+            return res.status(401).json({ msg: 'User not authorized' });
         }
 
         //get remove index
@@ -238,7 +238,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
         res.json(post.comments);
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ msg: 'Server Error' });
     }
 });
 
