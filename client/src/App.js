@@ -11,6 +11,9 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import CreateProfile from './components/profile-form/CreateProfile';
 import EditProfile from './components/profile-form/EditProfile';
 import Profiles from './components/Profiles/Profiles';
+import Profile from './components/Profile/Profile';
+import Posts from './components/Posts/Posts';
+import Post from './components/Post/Post';
 import AddExperience from './components/profile-form/AddExperience';
 import AddEducation from './components/profile-form/AddEducation';
 import { loadUser } from './actions/auth';
@@ -49,6 +52,11 @@ const App = () => {
                                 path='/profiles'
                                 component={Profiles}
                             />
+                            <Route
+                                exact
+                                path='/profile/:id'
+                                component={Profile}
+                            />
                             <PrivateRoute
                                 exact
                                 path='/dashboard'
@@ -73,6 +81,16 @@ const App = () => {
                                 exact
                                 path='/add-education'
                                 component={AddEducation}
+                            />
+                            <PrivateRoute
+                                exact
+                                path='/posts'
+                                component={Posts}
+                            />
+                            <PrivateRoute
+                                exact
+                                path='/post/:id'
+                                component={Post}
                             />
                         </Switch>
                     </section>
