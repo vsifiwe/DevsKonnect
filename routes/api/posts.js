@@ -183,8 +183,8 @@ router.post(
             const post = await Post.findById(req.params.id);
 
             const newComment = {
-                text: req.body.text,
                 name: user.name,
+                text: req.body.text,
                 avatar: user.avatar,
                 user: req.user,
             };
